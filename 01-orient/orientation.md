@@ -28,6 +28,6 @@ Set up persistent memory so Claude Code knows your product and stops building bl
 
 *Name + what it does + when to use it.*
 
-- **Name:** ___
-- **What it does:** ___
-- **When to use it:** ___
+- **Name:** [weekly-status](../skills/weekly-status.md)
+- **What it does:** Turns raw bullet-point notes into a formatted leadership update with Shipped, In Progress, Blockers, and Next Week sections (max 3 bullets each, plain language).
+- **When to use it:** Writing a weekly status or leadership update from rough notes.
