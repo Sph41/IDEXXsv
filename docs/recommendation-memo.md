@@ -9,7 +9,7 @@
 
 ## Recommendation
 
-**Roll out the Comeback Screen to all users in weeks 1â€“4 immediately; prioritize users who broke streaks in week 1.**
+**Run a 3-week full test to validate the pilot result (n=1,564 per variant), then roll out to all users in weeks 1â€“4; prioritize users who broke streaks in week 1.**
 
 ---
 
@@ -31,28 +31,51 @@ We shipped a Comeback Screen (friendly re-engagement notification + best-streak 
 
 ## Ask
 
-Approve production rollout to weeks 1â€“4 cohorts, with priority sequencing: week 1 â†’ week 2 â†’ weeks 3â€“4 over 2 weeks. I need budget approval and Raj's sprint slot to pull this forward.
+Approve a 3-week full test on weeks 1â€“2 cohorts (n=1,564 per variant, 50/50 split) with success criteria: day-7 retention â‰¥51% (control baseline 46% + 5pp MDE). If test confirms, approve production rollout to weeks 3â€“4 and broader rollout to all users. I need budget approval, Raj's sprint slot for instrumentation, and sign-off on the success threshold.
 
 ---
 
 ## Timeline
 
-- **Week of Oct 7:** Approve, Raj begins implementation (2â€“3 weeks)
-- **Week of Oct 21:** Rollout begins (week 1 cohort)
-- **Week of Nov 4:** Full production (all weeks 1â€“4)
-- **Week of Nov 11:** Measure day-7 retention lift on production cohorts
+- **Week of Oct 7:** Approve test design and success criteria
+- **Week of Oct 14:** Raj deploys test infrastructure; test begins on weeks 1â€“2 cohorts
+- **Week of Oct 21â€“28:** Data collection continues (1 week to reach sample)
+- **Week of Nov 4:** Day-7 retention measured (7 days post-randomization)
+- **Week of Nov 11:** Final test results; if successful, rollout begins to weeks 3â€“4
+- **Week of Nov 18:** Rollout to all weeks 1â€“4 cohorts
 
 ---
 
-## Risk if We Wait
+## Risk if We Wait 3 Weeks
 
-If we delay rollout by one quarter, we sacrifice ~10â€“15 pp of day-7 retention recovery per month (worst case: churn 4â€“6K users in active cohorts who could have been recovered). The test data is clean; the cost of delay is real users.
+If we delay full rollout by 3 weeks to run a proper test, we sacrifice ~1,500 users we could have recovered in that window (marginal at 85K WAU scale). Cost of waiting: ~1,500 users. Cost of rolling out a false positive to 85K+ users: reputational and engineering cost of mid-rollout pause/rollback. The trade-off is heavily in favor of the 3-week test.
+
+---
+
+## Success Criteria for Full Test
+
+**Test passes if:** Day-7 retention in treatment group â‰¥ 51% (control baseline 46% + 5pp MDE minimum threshold)  
+**Test fails if:** Day-7 retention in treatment group < 51%  
+**If test passes:** Proceed to production rollout to weeks 3â€“4, then full weeks 1â€“4.  
+**If test fails:** Hold rollout; conduct post-mortem to diagnose why pilot +30pp didn't replicate (cohort differences, design issues, etc.).
+
+---
+
+## Leading Indicators â€” Monitor Weekly During Test
+
+While the test runs, watch these 3 metrics weekly. They'll alert you to problems before the final day-7 result:
+
+1. **Day-1 retention** â€” Should stay stable or improve. Drop >2 pp = mechanical problem (notification/screen crash).
+2. **Notification open rate** â€” Should stay >15%. Drop <10% = fatigue or delivery issue.
+3. **Comeback screen engagement** â€” Should stay >50%. Drop <30% = tone or credibility problem.
+
+If any leading indicator fails, pause the test and investigate before day-7 measurement.
 
 ---
 
 ## Notes for Follow-Up
 
-**Open question for next sprint:** Users in the 24% of the treatment group who still churned may have experienced a second streak break (recidivism), where the Comeback offer became noise. We're designing a spike to confirm this and determine if second-break users need a different intervention. This doesn't block rollout, but it informs our 2-week product iteration plan.
+**After test passes:** Users in the 24% of the pilot treatment group who churned may have experienced a second streak break (recidivism), where the Comeback offer became noise. We're planning a separate investigation to confirm this and determine if second-break users need a different intervention. This informs the post-launch product roadmap.
 
 **Proactive freeze opportunity:** The 46% control baseline in week 5 suggests room for a separate investment: starter freezes granted at signup (preventing breaks upfront, not just recovering after). This is the real Day-7 lever. Recommend scoping this as a Q4 initiative.
 
